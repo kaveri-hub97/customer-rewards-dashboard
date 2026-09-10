@@ -10,7 +10,7 @@ import {
   getTotalRewardPoints,
   getYears
 } from '../utils/calculate-rewards';
-
+// This file contains unit tests for the calculateRewardPoints function and other utility functions related to reward calculations. It uses the Vitest testing framework to define test cases and assertions. The tests cover various scenarios, including calculating reward points based on purchase amounts, filtering transactions by customer and year, and generating reward summaries.
 const transactions = [
   {
     id: 1,

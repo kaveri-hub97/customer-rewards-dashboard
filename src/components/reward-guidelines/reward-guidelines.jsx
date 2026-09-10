@@ -2,7 +2,7 @@ import {
   FIRST_REWARD_LIMIT,
   SECOND_REWARD_LIMIT
 } from '../../constants/app-constants';
-
+// This component is used to display the reward guidelines. It is used in the AnnualRewards component.
 const RewardGuidelines = () => {
   return (
     <section className="side-card reward-guidelines-card">

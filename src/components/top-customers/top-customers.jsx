@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+//top customers component to display the top customers by total reward points
 const TopCustomers = ({ customers }) => {
   return (
     <section className="side-card top-customers-card">

@@ -10,7 +10,8 @@ import PropTypes from 'prop-types';
 import {
   SELECT_CUSTOMER
 } from '../../constants/app-constants';
-
+// This component is used to select a customer from a list of customers. It is used in the AnnualRewards component.
+// It is a controlled component that takes in the selected customer and a callback function to update the selected customer. It also has a search functionality to filter the list of customers.
 const CustomerSelector = ({
   customers,
   selectedCustomer,

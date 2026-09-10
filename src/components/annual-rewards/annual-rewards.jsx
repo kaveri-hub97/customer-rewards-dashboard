@@ -6,7 +6,7 @@ import {
 
 const AnnualRewards = ({ rewardData }) => {
   const customer = rewardData[0];
-
+  //add a check to see if the customer has reward data, if not display a message
   return (
     <section className="rewards-section">
       <div className="table-container">
@@ -29,6 +29,7 @@ const AnnualRewards = ({ rewardData }) => {
             </div>
           </div>
         ) : (
+          //display a message when no reward data is found
           <p className="no-data">
             {NO_REWARD_DATA_FOUND}
           </p>

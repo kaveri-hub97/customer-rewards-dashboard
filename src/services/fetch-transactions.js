@@ -10,6 +10,26 @@ const fetchTransactions = () => {
         return;
       }
 
+      const hasInvalidData = transactions.some(
+        (transaction) =>
+          !Number.isFinite(transaction.id) ||
+          !Number.isFinite(transaction.customerId) ||
+          !transaction.customerName ||
+          Number.isNaN(
+            new Date(
+              `${transaction.date}T00:00:00`
+            ).getTime()
+          ) ||
+          !Number.isFinite(transaction.amount)
+      );
+
+      if (hasInvalidData) {
+        reject(
+          new Error('Invalid transaction data.')
+        );
+        return;
+      }
+
       resolve(transactions);
     }, 500);
   });

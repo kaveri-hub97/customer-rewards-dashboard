@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+// This component is used to select a year from a list of years.
 const YearSelector = ({
   years,
   selectedYear,

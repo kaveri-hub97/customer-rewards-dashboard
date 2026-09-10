@@ -4,7 +4,7 @@ import {
   calculateRewardPoints,
   formatTransactionDate
 } from '../../utils/calculate-rewards';
-
+// This component is used to display the transaction details of a customer in a table format. 
 const TransactionDetails = ({ transactions }) => {
   if (transactions.length === 0) {
     return (

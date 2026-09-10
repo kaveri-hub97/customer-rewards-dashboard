@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import {
   REPORT_MONTHS
 } from '../../constants/app-constants';
-
+// This component is used to select a month from a list of months. It is used in the AnnualRewards component.
 const MonthSelector = ({
   selectedMonths,
   onMonthChange

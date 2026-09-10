@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+// This component is used to display the total reward points.
 const RewardSummary = ({ rewardPoints }) => {
   return (
     <section className="reward-section">
