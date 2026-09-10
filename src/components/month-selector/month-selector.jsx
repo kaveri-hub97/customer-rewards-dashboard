@@ -18,118 +18,122 @@ const MonthSelector = ({
   const [pendingMonths, setPendingMonths] =
     useState(selectedMonths);
 
-  const dropdownRef = useRef(null);
+  const selectorRef = useRef(null);
+
+  const selectedMonthLabels =
+    REPORT_MONTHS.filter((month) =>
+      selectedMonths.includes(month.value)
+    ).map((month) => month.label);
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
+    const handleClickOutside = (event) => {
       if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
+        selectorRef.current &&
+        !selectorRef.current.contains(event.target)
       ) {
         setIsOpen(false);
-        setPendingMonths(selectedMonths);
       }
     };
 
     document.addEventListener(
       'mousedown',
-      handleOutsideClick
+      handleClickOutside
     );
 
     return () => {
       document.removeEventListener(
         'mousedown',
-        handleOutsideClick
+        handleClickOutside
       );
     };
-  }, [selectedMonths]);
+  }, []);
 
-  const handleDropdownToggle = () => {
-    if (!isOpen) {
-      setPendingMonths(selectedMonths);
+  const getMonthLabel = () => {
+    if (selectedMonthLabels.length === 0) {
+      return 'Select Month';
     }
 
-    setIsOpen(!isOpen);
+    if (selectedMonthLabels.length <= 3) {
+      return selectedMonthLabels.join(', ');
+    }
+
+    return `${selectedMonthLabels
+      .slice(0, 4)
+      .join(', ')}... +${selectedMonthLabels.length - 4}`;
   };
 
-  const handleMonthClick = (monthValue) => {
-    if (pendingMonths.includes(monthValue)) {
-      setPendingMonths(
-        pendingMonths.filter(
-          (month) => month !== monthValue
-        )
-      );
+  const handleOpen = () => {
+    setPendingMonths(selectedMonths);
+    setIsOpen((open) => !open);
+  };
 
-      return;
-    }
-
-    setPendingMonths([
-      ...pendingMonths,
-      monthValue
-    ]);
+  const handleMonthSelect = (monthValue) => {
+    setPendingMonths((months) =>
+      months.includes(monthValue)
+        ? months.filter(
+            (month) => month !== monthValue
+          )
+        : [...months, monthValue]
+    );
   };
 
   const handleSelectAll = () => {
     setPendingMonths(
-      REPORT_MONTHS.map(
-        (month) => month.value
-      )
+      REPORT_MONTHS.map((month) => month.value)
     );
   };
 
   const handleReset = () => {
     setPendingMonths([]);
+    onMonthChange([]);
   };
 
-  const handleApply = () => {
+  const handleApplyAll = () => {
     onMonthChange(pendingMonths);
     setIsOpen(false);
   };
 
-  const selectedMonthLabel =
-    selectedMonths.length === REPORT_MONTHS.length
-      ? 'All Months'
-      : 'Select Month';
-
   return (
     <div
-      ref={dropdownRef}
+      ref={selectorRef}
       className="selector month-selector"
     >
-      <label htmlFor="month-button">
-        Month
-      </label>
+      <label htmlFor="month-button">Month</label>
 
       <button
         id="month-button"
         type="button"
         className="month-button"
-        onClick={handleDropdownToggle}
+        onClick={handleOpen}
         aria-expanded={isOpen}
+        aria-haspopup="listbox"
       >
-        <span>
-          {selectedMonthLabel}
+        <span className="month-label">
+          {getMonthLabel()}
         </span>
 
-        <span className="dropdown-arrow">
-          ▼
-        </span>
+        <span className="dropdown-arrow">▼</span>
       </button>
 
       {isOpen && (
         <div className="month-dropdown">
-          <div className="month-options">
+          <div
+            className="month-options"
+            role="listbox"
+          >
             {REPORT_MONTHS.map((month) => (
               <button
                 key={month.value}
                 type="button"
                 className={`month-option ${
-                  pendingMonths.includes(month.value)
+                  pendingMonths.includes(
+                    month.value
+                  )
                     ? 'selected'
                     : ''
                 }`}
                 onClick={() =>
-                  handleMonthClick(month.value)
+                  handleMonthSelect(month.value)
                 }
               >
                 {month.label}
@@ -157,9 +161,9 @@ const MonthSelector = ({
             <button
               type="button"
               className="month-action-button"
-              onClick={handleApply}
+              onClick={handleApplyAll}
             >
-              Apply All
+              Apply
             </button>
           </div>
         </div>

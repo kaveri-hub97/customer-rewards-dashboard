@@ -183,9 +183,9 @@ button {
 }
 
 .month-button {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   height: 54px;
   padding: 0 13px;
@@ -201,7 +201,18 @@ button {
   border-color: #aebbc7;
 }
 
+.month-label {
+  display: block;
+  width: 100%;
+  padding-right: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .dropdown-arrow {
+  position: absolute;
+  right: 13px;
   color: #718093;
   font-size: 10px;
 }
@@ -264,10 +275,22 @@ button {
   background: #f5f7f9;
   color: #52657a;
   font-size: 12px;
+  font-weight: 700;
 }
 
-.month-action-button:hover {
-  background: #e9eef3;
+.month-action-button:nth-child(1),
+.month-action-button:nth-child(1):hover {
+  background: #f4d35e;
+}
+
+.month-action-button:nth-child(2),
+.month-action-button:nth-child(2):hover {
+  background: #f4a261;
+}
+
+.month-action-button:nth-child(3),
+.month-action-button:nth-child(3):hover {
+  background: #7cb342;
 }
 
 .reward-points {
@@ -321,11 +344,24 @@ button {
   min-width: 0;
 }
 
+.rewards-section .table-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .table-title {
   margin: 0 0 10px;
   color: #24384e;
   font-size: 17px;
   font-weight: 600;
+}
+
+.rewards-section .table-container > .no-data {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .annual-reward-card {
@@ -464,6 +500,20 @@ button {
 .transaction-details {
   width: 100%;
   min-width: 0;
+}
+
+.transaction-details-empty {
+  display: flex;
+  min-height: 150px;
+  flex-direction: column;
+}
+
+.transaction-details-empty .no-data {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .details-header {

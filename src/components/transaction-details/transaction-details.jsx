@@ -8,7 +8,7 @@ import {
 const TransactionDetails = ({ transactions }) => {
   if (transactions.length === 0) {
     return (
-      <div className="transaction-details">
+      <div className="transaction-details transaction-details-empty">
         <div className="details-header">
           <h2>Transaction Overview</h2>
         </div>
